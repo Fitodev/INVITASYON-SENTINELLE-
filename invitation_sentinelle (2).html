@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Invitation – Culte d'Exception | Sentinelle</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════
+   MOBILE-FIRST — base styles = small screen
+   ══════════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --navy:        #0a1628;
+  --navy-mid:    #0d1f3c;
+  --sky:         #4fa3e0;
+  --sky-light:   #7ec0f0;
+  --sky-pale:    #b8dff7;
+  --gold:        #c9a84c;
+  --gold-light:  #e2c97e;
+  --gold-bright: #f0d88a;
+  --white:       #ffffff;
+}
+
+body {
+  background: linear-gradient(135deg,#060e1e 0%,#0a1628 40%,#0e2040 70%,#07111f 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  font-family: 'Lato', sans-serif;
+  overflow-x: hidden;
+  padding: 20px 10px 40px;
+}
+@media (min-width: 540px) { body { padding: 36px 20px 50px; align-items: center; } }
+@media (min-width: 768px) { body { padding: 48px 24px 60px; } }
+
+/* ── PARTICLES ── */
+#particles {
+  position: fixed; top:0; left:0;
+  width:100%; height:100%;
+  pointer-events:none; z-index:0;
+}
+
+/* ── CARD SCENE ── */
+.card-scene { position:relative; z-index:1; perspective:1200px; width:100%; max-width:700px; }
+
+.card {
+  width: 100%;
+  background: linear-gradient(160deg,var(--navy-mid) 0%,var(--navy) 50%,#081220 100%);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(201,168,76,0.12),
+    0 20px 60px rgba(0,0,0,0.7),
+    0 0 50px rgba(79,163,224,0.07),
+    inset 0 1px 0 rgba(201,168,76,0.2);
+  animation: cardReveal 1.2s cubic-bezier(0.16,1,0.3,1) both;
+}
+@keyframes cardReveal {
+  from { opacity:0; transform:translateY(36px) scale(0.97); }
+  to   { opacity:1; transform:translateY(0) scale(1); }
+}
+
+/* ── SHIMMER ── */
+.shimmer {
+  position:absolute; inset:0;
+  background: linear-gradient(105deg,transparent 30%,rgba(255,255,255,0.04) 50%,transparent 70%);
+  background-size:300% 100%;
+  animation: shimmer 4s ease-in-out infinite;
+  pointer-events:none; z-index:10;
+}
+@keyframes shimmer {
+  0%,100% { background-position:200% 0; }
+  50%      { background-position:-100% 0; }
+}
+
+/* ── CORNER ORNAMENTS ── */
+.corner { position:absolute; width:44px; height:44px; }
+.corner svg { display:block; width:100%; height:100%; }
+.corner.tl { top:10px; left:10px; }
+.corner.tr { top:10px; right:10px; transform:scaleX(-1); }
+.corner.bl { bottom:10px; left:10px; transform:scaleY(-1); }
+.corner.br { bottom:10px; right:10px; transform:scale(-1); }
+@media (min-width:540px) {
+  .corner { width:60px; height:60px; }
+  .corner.tl { top:12px; left:12px; }
+  .corner.tr { top:12px; right:12px; }
+  .corner.bl { bottom:12px; left:12px; }
+  .corner.br { bottom:12px; right:12px; }
+}
+@media (min-width:768px) {
+  .corner { width:70px; height:70px; }
+  .corner.tl { top:14px; left:14px; }
+  .corner.tr { top:14px; right:14px; }
+  .corner.bl { bottom:14px; left:14px; }
+  .corner.br { bottom:14px; right:14px; }
+}
+
+/* ── GOLD RULE ── */
+.h-rule { display:flex; align-items:center; gap:10px; padding:0 18px; }
+.h-rule .line { flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+.h-rule .diamond { width:7px; height:7px; background:var(--gold-light); transform:rotate(45deg); flex-shrink:0; box-shadow:0 0 8px rgba(201,168,76,0.6); }
+.h-rule.thin .line { opacity:0.4; }
+.mb16 { margin-bottom:16px; }
+.mb20 { margin-bottom:20px; }
+@media (min-width:540px) { .h-rule { padding:0 32px; gap:14px; } }
+@media (min-width:768px) { .h-rule { padding:0 44px; } }
+
+/* ── HEADER ── */
+.header-band {
+  background: linear-gradient(180deg,rgba(201,168,76,0.12) 0%,transparent 100%);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+  padding: 36px 18px 24px;
+  text-align:center; position:relative;
+}
+@media (min-width:540px) { .header-band { padding:44px 32px 28px; } }
+@media (min-width:768px) { .header-band { padding:50px 44px 32px; } }
+
+.eyebrow {
+  font-family:'Cinzel',serif; color:var(--sky); text-transform:uppercase;
+  margin-bottom:14px; opacity:0; animation:fadeUp 0.8s 0.4s ease both;
+  font-size:7.5px; letter-spacing:2.5px;
+}
+@media (min-width:480px) { .eyebrow { font-size:9px; letter-spacing:4px; } }
+@media (min-width:768px) { .eyebrow { font-size:10px; letter-spacing:5px; margin-bottom:18px; } }
+
+.main-title {
+  font-family:'Cinzel',serif; font-weight:700; color:var(--white);
+  letter-spacing:2px; line-height:1.15;
+  text-shadow:0 0 40px rgba(79,163,224,0.3);
+  opacity:0; animation:fadeUp 0.9s 0.6s ease both;
+  font-size:20px;
+}
+@media (min-width:400px) { .main-title { font-size:24px; } }
+@media (min-width:540px) { .main-title { font-size:32px; letter-spacing:3px; } }
+@media (min-width:768px) { .main-title { font-size:42px; } }
+
+.main-title span {
+  display:block;
+  background:linear-gradient(135deg,var(--gold-light) 0%,var(--gold-bright) 50%,var(--gold-light) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; background-size:200% auto;
+  animation:goldenShift 3s ease-in-out infinite;
+  font-size:13px; letter-spacing:1px; margin-top:6px;
+}
+@media (min-width:400px) { .main-title span { font-size:15px; } }
+@media (min-width:540px) { .main-title span { font-size:19px; letter-spacing:1.5px; } }
+@media (min-width:768px) { .main-title span { font-size:25px; letter-spacing:2px; } }
+
+@keyframes goldenShift {
+  0%,100% { background-position:0% center; }
+  50%      { background-position:100% center; }
+}
+
+.subtitle-italic {
+  font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300;
+  color:var(--sky-pale); letter-spacing:0.5px;
+  opacity:0; animation:fadeUp 0.9s 0.8s ease both;
+  font-size:12px; margin-top:10px;
+}
+@media (min-width:540px) { .subtitle-italic { font-size:15px; margin-top:12px; } }
+@media (min-width:768px) { .subtitle-italic { font-size:19px; letter-spacing:1px; margin-top:14px; } }
+
+/* ── CARD BODY ── */
+.card-body { padding:0 14px; }
+@media (min-width:480px) { .card-body { padding:0 24px; } }
+@media (min-width:768px) { .card-body { padding:0 44px; } }
+
+.invite-text {
+  text-align:center; font-family:'Cormorant Garamond',serif;
+  color:rgba(200,220,245,0.85); line-height:1.8; font-weight:400;
+  opacity:0; animation:fadeUp 0.8s 1.0s ease both;
+  font-size:13px; padding:18px 6px;
+}
+@media (min-width:480px) { .invite-text { font-size:15px; padding:22px 10px; } }
+@media (min-width:768px) { .invite-text { font-size:17px; padding:26px 20px; } }
+.invite-text strong { color:var(--gold-light); font-style:italic; }
+
+/* ── THEME BLOCK ── */
+.theme-block {
+  background:linear-gradient(135deg,rgba(79,163,224,0.08) 0%,rgba(201,168,76,0.06) 100%);
+  border:1px solid rgba(201,168,76,0.2); border-left:3px solid var(--gold);
+  border-radius:2px; text-align:center;
+  opacity:0; animation:fadeUp 0.8s 1.2s ease both;
+  margin:4px 0 14px; padding:16px 12px;
+}
+@media (min-width:540px) { .theme-block { padding:22px 28px; margin-bottom:18px; } }
+@media (min-width:768px) { .theme-block { padding:24px 32px; margin-bottom:20px; } }
+
+.theme-label { font-family:'Cinzel',serif; color:var(--sky); margin-bottom:8px; font-size:8px; letter-spacing:3px; }
+@media (min-width:540px) { .theme-label { font-size:10px; letter-spacing:4px; margin-bottom:10px; } }
+
+.theme-quote {
+  font-family:'Playfair Display',serif; font-style:italic; color:var(--gold-bright);
+  line-height:1.5; text-shadow:0 0 20px rgba(201,168,76,0.2);
+  font-size:14px;
+}
+@media (min-width:540px) { .theme-quote { font-size:18px; } }
+@media (min-width:768px) { .theme-quote { font-size:21px; } }
+
+/* ── INFO GRID ── */
+.info-grid {
+  display:grid; gap:10px; grid-template-columns:1fr;
+  margin:14px 0;
+  opacity:0; animation:fadeUp 0.8s 1.4s ease both;
+}
+@media (min-width:400px) { .info-grid { grid-template-columns:1fr 1fr; gap:12px; } }
+@media (min-width:768px) { .info-grid { gap:16px; margin:18px 0; } }
+
+.info-card {
+  background:rgba(255,255,255,0.03); border:1px solid rgba(201,168,76,0.15);
+  border-radius:2px; text-align:center;
+  transition:background 0.3s, border-color 0.3s, transform 0.3s; cursor:default;
+  padding:12px 10px;
+}
+@media (min-width:540px) { .info-card { padding:16px 18px; } }
+@media (min-width:768px) { .info-card { padding:18px 20px; } }
+.info-card:hover { background:rgba(79,163,224,0.07); border-color:rgba(201,168,76,0.35); transform:translateY(-2px); }
+.info-card .ic-icon { display:block; margin-bottom:6px; filter:drop-shadow(0 0 6px rgba(79,163,224,0.5)); font-size:18px; }
+@media (min-width:480px) { .info-card .ic-icon { font-size:22px; } }
+.info-card .ic-label { font-family:'Cinzel',serif; color:var(--sky); margin-bottom:6px; font-size:7.5px; letter-spacing:2px; }
+@media (min-width:540px) { .info-card .ic-label { font-size:9px; letter-spacing:3px; } }
+.info-card .ic-value { font-family:'Playfair Display',serif; font-weight:600; color:var(--white); line-height:1.4; font-size:13px; }
+@media (min-width:540px) { .info-card .ic-value { font-size:15px; } }
+@media (min-width:768px) { .info-card .ic-value { font-size:16px; } }
+.info-card .ic-sub { font-family:'Lato',sans-serif; font-weight:300; color:rgba(200,220,245,0.6); margin-top:3px; font-size:10px; }
+@media (min-width:540px) { .info-card .ic-sub { font-size:12px; } }
+
+/* ── PROGRAMME LINE ── */
+.programme-line {
+  background:linear-gradient(90deg,rgba(201,168,76,0.06),rgba(79,163,224,0.06));
+  border-top:1px solid rgba(201,168,76,0.12); border-bottom:1px solid rgba(201,168,76,0.12);
+  font-family:'Cormorant Garamond',serif; font-style:italic;
+  color:rgba(200,220,245,0.8); text-align:center; line-height:1.65;
+  opacity:0; animation:fadeUp 0.8s 1.55s ease both;
+  margin:4px 0 14px; padding:13px 10px; font-size:12px;
+}
+@media (min-width:480px) { .programme-line { font-size:14px; padding:15px 18px; } }
+@media (min-width:768px) { .programme-line { font-size:16px; padding:18px 24px; margin-bottom:18px; } }
+
+/* ── HONNEUR BLOCK ── */
+.honneur-block {
+  text-align:center; opacity:0; animation:fadeUp 0.8s 1.7s ease both;
+  padding:16px 8px;
+}
+@media (min-width:540px) { .honneur-block { padding:20px 16px; } }
+@media (min-width:768px) { .honneur-block { padding:26px 20px; } }
+
+.honneur-main {
+  font-family:'Cinzel',serif; font-weight:600;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold-bright),var(--sky-light));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  margin-bottom:10px; font-size:11px; letter-spacing:0.8px;
+}
+@media (min-width:400px) { .honneur-main { font-size:13px; } }
+@media (min-width:540px) { .honneur-main { font-size:16px; letter-spacing:1.5px; } }
+@media (min-width:768px) { .honneur-main { font-size:20px; letter-spacing:2px; } }
+
+.honneur-sub { font-family:'Cormorant Garamond',serif; font-weight:400; color:rgba(200,220,245,0.75); line-height:1.7; font-size:13px; }
+@media (min-width:540px) { .honneur-sub { font-size:15px; } }
+@media (min-width:768px) { .honneur-sub { font-size:16px; } }
+
+/* ══════════════════════════════════
+   COUNTDOWN SECTION
+   ══════════════════════════════════ */
+.countdown-section {
+  background: linear-gradient(180deg,rgba(79,163,224,0.07) 0%,rgba(201,168,76,0.09) 100%);
+  border-top:1px solid rgba(201,168,76,0.22);
+  border-bottom:1px solid rgba(201,168,76,0.22);
+  text-align:center;
+  opacity:0; animation:fadeUp 0.8s 1.85s ease both;
+  padding:20px 14px 22px;
+}
+@media (min-width:480px) { .countdown-section { padding:24px 24px 26px; } }
+@media (min-width:768px) { .countdown-section { padding:30px 44px 32px; } }
+
+.cd-label {
+  font-family:'Cinzel',serif; color:var(--sky); letter-spacing:3px; margin-bottom:14px;
+  font-size:7.5px;
+}
+@media (min-width:480px) { .cd-label { font-size:9px; letter-spacing:4.5px; margin-bottom:18px; } }
+@media (min-width:768px) { .cd-label { font-size:10px; letter-spacing:5px; margin-bottom:20px; } }
+
+.cd-grid {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:6px;
+}
+@media (min-width:480px) { .cd-grid { gap:10px; } }
+@media (min-width:768px) { .cd-grid { gap:16px; } }
+
+.cd-box {
+  background:linear-gradient(160deg,rgba(13,31,60,0.9),rgba(8,18,32,0.95));
+  border:1px solid rgba(201,168,76,0.22); border-radius:3px;
+  position:relative; overflow:hidden; padding:10px 3px 12px;
+}
+@media (min-width:480px) { .cd-box { padding:12px 6px 14px; } }
+@media (min-width:768px) { .cd-box { padding:16px 10px 18px; } }
+
+.cd-box::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent); opacity:0.6;
+}
+
+.cd-num {
+  font-family:'Cinzel',serif; font-weight:700; color:var(--gold-bright);
+  line-height:1; display:block; transition:all 0.3s ease;
+  text-shadow:0 0 18px rgba(201,168,76,0.5);
+  font-size:26px;
+}
+@media (min-width:360px) { .cd-num { font-size:30px; } }
+@media (min-width:480px) { .cd-num { font-size:38px; } }
+@media (min-width:600px) { .cd-num { font-size:46px; } }
+@media (min-width:768px) { .cd-num { font-size:54px; } }
+
+.cd-num.flip { animation:numFlip 0.35s ease; }
+@keyframes numFlip {
+  0%   { transform:translateY(0);    opacity:1; }
+  40%  { transform:translateY(-8px); opacity:0; }
+  60%  { transform:translateY(8px);  opacity:0; }
+  100% { transform:translateY(0);    opacity:1; }
+}
+
+.cd-unit {
+  font-family:'Cinzel',serif; color:var(--sky); display:block; margin-top:5px;
+  font-size:6px; letter-spacing:1.5px;
+}
+@media (min-width:480px) { .cd-unit { font-size:7.5px; letter-spacing:2px; } }
+@media (min-width:768px) { .cd-unit { font-size:9px; margin-top:8px; } }
+
+.cd-event-date {
+  font-family:'Cormorant Garamond',serif; font-style:italic;
+  color:rgba(200,220,245,0.55); letter-spacing:0.8px;
+  font-size:10px; margin-top:14px;
+}
+@media (min-width:480px) { .cd-event-date { font-size:12px; margin-top:16px; } }
+@media (min-width:768px) { .cd-event-date { font-size:13px; margin-top:18px; letter-spacing:1px; } }
+
+/* ── FOOTER ── */
+.card-footer {
+  background:linear-gradient(0deg,rgba(201,168,76,0.1) 0%,transparent 100%);
+  border-top:1px solid rgba(201,168,76,0.15); text-align:center;
+  opacity:0; animation:fadeUp 0.8s 2.0s ease both;
+  padding:20px 18px 28px;
+}
+@media (min-width:540px) { .card-footer { padding:24px 32px 34px; } }
+@media (min-width:768px) { .card-footer { padding:28px 44px 38px; } }
+
+.footer-church {
+  font-family:'Cinzel',serif; color:var(--gold-light);
+  font-size:9px; letter-spacing:2px;
+}
+@media (min-width:480px) { .footer-church { font-size:11px; letter-spacing:2.5px; } }
+@media (min-width:768px) { .footer-church { font-size:13px; } }
+
+.footer-group {
+  font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:600; color:var(--white);
+  font-size:17px; margin-top:4px;
+}
+@media (min-width:480px) { .footer-group { font-size:19px; } }
+@media (min-width:768px) { .footer-group { font-size:22px; letter-spacing:1px; } }
+
+.bienvenue {
+  display:inline-block; margin-top:12px;
+  border:1px solid rgba(201,168,76,0.4); background:rgba(201,168,76,0.07);
+  font-family:'Cinzel',serif; color:var(--gold-light); border-radius:1px;
+  animation:pulse-gold 2.5s ease-in-out infinite;
+  padding:7px 16px; font-size:8px; letter-spacing:2px;
+}
+@media (min-width:480px) { .bienvenue { padding:9px 24px; font-size:10px; letter-spacing:3px; } }
+@media (min-width:768px) { .bienvenue { padding:10px 28px; font-size:11px; } }
+
+@keyframes pulse-gold {
+  0%,100% { box-shadow:0 0 0 0 rgba(201,168,76,0); }
+  50%      { box-shadow:0 0 12px 3px rgba(201,168,76,0.2); }
+}
+
+/* ── GENERIC ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<div class="card-scene">
+<div class="card">
+  <div class="shimmer"></div>
+
+  <!-- Coins décoratifs -->
+  <div class="corner tl">
+    <svg viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 68 L2 2 L68 2" stroke="#c9a84c" stroke-width="1.5" opacity="0.7"/>
+      <path d="M2 2 L14 2 M2 2 L2 14" stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+      <path d="M8 30 L8 8 L30 8" stroke="#4fa3e0" stroke-width="0.7" opacity="0.5"/>
+      <circle cx="2" cy="2" r="3" fill="#c9a84c" opacity="0.8"/>
+      <circle cx="2" cy="2" r="5" fill="none" stroke="#c9a84c" stroke-width="0.5" opacity="0.4"/>
+    </svg>
+  </div>
+  <div class="corner tr">
+    <svg viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 68 L2 2 L68 2" stroke="#c9a84c" stroke-width="1.5" opacity="0.7"/>
+      <path d="M2 2 L14 2 M2 2 L2 14" stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+      <path d="M8 30 L8 8 L30 8" stroke="#4fa3e0" stroke-width="0.7" opacity="0.5"/>
+      <circle cx="2" cy="2" r="3" fill="#c9a84c" opacity="0.8"/>
+      <circle cx="2" cy="2" r="5" fill="none" stroke="#c9a84c" stroke-width="0.5" opacity="0.4"/>
+    </svg>
+  </div>
+  <div class="corner bl">
+    <svg viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 68 L2 2 L68 2" stroke="#c9a84c" stroke-width="1.5" opacity="0.7"/>
+      <path d="M2 2 L14 2 M2 2 L2 14" stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+      <path d="M8 30 L8 8 L30 8" stroke="#4fa3e0" stroke-width="0.7" opacity="0.5"/>
+      <circle cx="2" cy="2" r="3" fill="#c9a84c" opacity="0.8"/>
+    </svg>
+  </div>
+  <div class="corner br">
+    <svg viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 68 L2 2 L68 2" stroke="#c9a84c" stroke-width="1.5" opacity="0.7"/>
+      <path d="M2 2 L14 2 M2 2 L2 14" stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+      <path d="M8 30 L8 8 L30 8" stroke="#4fa3e0" stroke-width="0.7" opacity="0.5"/>
+      <circle cx="2" cy="2" r="3" fill="#c9a84c" opacity="0.8"/>
+    </svg>
+  </div>
+
+  <!-- ══ EN-TÊTE ══ -->
+  <div class="header-band">
+    <p class="eyebrow">Église Adventiste du 7e Jour &nbsp;·&nbsp; Sentinelle</p>
+    <div class="h-rule mb16">
+      <div class="line"></div><div class="diamond"></div><div class="line"></div>
+    </div>
+    <h1 class="main-title">
+      CULTE D'EXCEPTION
+      <span>"UNE RENCONTRE EXTRAORDINAIRE AVEC DIEU"</span>
+    </h1>
+    <p class="subtitle-italic">Une célébration préparée avec amour pour vous</p>
+  </div>
+
+  <!-- ══ CORPS ══ -->
+  <div class="card-body">
+
+    <p class="invite-text">
+      L'<strong>Église Adventiste du 7e Jour – Sentinelle</strong><br>
+      vous invite avec joie à prendre part à un<br>
+      <strong>culte spécial</strong> en l'honneur de nos visiteurs et amis.
+    </p>
+
+    <div class="h-rule thin mb16">
+      <div class="line"></div>
+      <div class="diamond" style="width:5px;height:5px;opacity:0.6;"></div>
+      <div class="line"></div>
+    </div>
+
+    <!-- Thème -->
+    <div class="theme-block">
+      <p class="theme-label">✦ &nbsp; T H È M E &nbsp; ✦</p>
+      <p class="theme-quote">"Une rencontre qui peut changer une vie"</p>
+    </div>
+
+    <!-- Date & Adresse -->
+    <div class="info-grid">
+      <div class="info-card">
+        <span class="ic-icon">📅</span>
+        <p class="ic-label">DATE</p>
+        <p class="ic-value">Samedi 9 mai 2026</p>
+        <p class="ic-sub">Culte solennel du Sabbat</p>
+      </div>
+      <div class="info-card">
+        <span class="ic-icon">📍</span>
+        <p class="ic-label">ADRESSE</p>
+        <p class="ic-value">Calle Cinco 1183</p>
+        <p class="ic-sub">Comuna de Renca</p>
+      </div>
+    </div>
+
+    <!-- Programme -->
+    <div class="programme-line">
+      Un programme spécialement préparé pour vous<br>
+      dans une atmosphère <em>chaleureuse, fraternelle et spirituelle.</em>
+    </div>
+
+    <!-- Honneur -->
+    <div class="honneur-block">
+      <p class="honneur-main">✦ &nbsp; VOUS ÊTES NOTRE INVITÉ(E) D'HONNEUR &nbsp; ✦</p>
+      <p class="honneur-sub">
+        Votre présence nous fera grandement plaisir.<br>
+        <em style="color:var(--gold-light);">Soyez les bienvenus !</em>
+      </p>
+    </div>
+
+  </div><!-- /card-body -->
+
+  <!-- ── Séparateur triple diamant ── -->
+  <div class="h-rule thin" style="padding:0 16px; margin-bottom:0;">
+    <div class="line"></div>
+    <div class="diamond" style="width:5px;height:5px;opacity:0.5;"></div>
+    <div class="diamond" style="width:9px;height:9px;margin:0 4px;"></div>
+    <div class="diamond" style="width:5px;height:5px;opacity:0.5;"></div>
+    <div class="line"></div>
+  </div>
+
+  <!-- ══ COMPTE À REBOURS ══ -->
+  <div class="countdown-section">
+    <p class="cd-label">✦ &nbsp; COMPTE À REBOURS &nbsp; ✦</p>
+    <div class="cd-grid">
+      <div class="cd-box">
+        <span class="cd-num" id="cd-days">00</span>
+        <span class="cd-unit">JOURS</span>
+      </div>
+      <div class="cd-box">
+        <span class="cd-num" id="cd-hours">00</span>
+        <span class="cd-unit">HEURES</span>
+      </div>
+      <div class="cd-box">
+        <span class="cd-num" id="cd-mins">00</span>
+        <span class="cd-unit">MINUTES</span>
+      </div>
+      <div class="cd-box">
+        <span class="cd-num" id="cd-secs">00</span>
+        <span class="cd-unit">SECONDES</span>
+      </div>
+    </div>
+    <p class="cd-event-date">Samedi 9 mai 2026 &nbsp;·&nbsp; Sentinelle &nbsp;·&nbsp; Renca</p>
+  </div>
+
+  <!-- ══ PIED DE PAGE ══ -->
+  <div class="card-footer">
+    <p class="footer-church">ÉGLISE ADVENTISTE DU 7e JOUR</p>
+    <p class="footer-group">Sentinelle</p>
+    <div><span class="bienvenue">SOYEZ LES BIENVENUS</span></div>
+  </div>
+
+</div><!-- /card -->
+</div><!-- /card-scene -->
+
+<script>
+/* ── PARTICULES ── */
+const canvas = document.getElementById('particles');
+const ctx    = canvas.getContext('2d');
+let W, H, pts;
+
+function resize() {
+  W = canvas.width  = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+  initPts();
+}
+function initPts() {
+  const n = Math.min(Math.floor((W * H) / 8000), 130);
+  pts = Array.from({length: n}, () => ({
+    x: Math.random() * W, y: Math.random() * H,
+    r: Math.random() * 1.5 + 0.3,
+    a: Math.random(), da: (Math.random() - 0.5) * 0.008,
+    dx: (Math.random() - 0.5) * 0.15, dy: (Math.random() - 0.5) * 0.15,
+    col: Math.random() > 0.7
+      ? 'rgba(79,163,224,'
+      : Math.random() > 0.5
+        ? 'rgba(201,168,76,'
+        : 'rgba(255,255,255,'
+  }));
+}
+function animatePts() {
+  ctx.clearRect(0, 0, W, H);
+  pts.forEach(p => {
+    p.a += p.da;
+    if (p.a <= 0 || p.a >= 1) p.da *= -1;
+    p.x += p.dx; p.y += p.dy;
+    if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+    if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = p.col + Math.max(0.05, p.a * 0.7) + ')';
+    ctx.fill();
+  });
+  requestAnimationFrame(animatePts);
+}
+window.addEventListener('resize', resize);
+resize(); animatePts();
+
+/* ── TILT 3D (desktop uniquement) ── */
+const scene = document.querySelector('.card-scene');
+const card  = document.querySelector('.card');
+if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+  scene.addEventListener('mousemove', e => {
+    const r  = scene.getBoundingClientRect();
+    const mx = (e.clientX - r.left) / r.width  - 0.5;
+    const my = (e.clientY - r.top)  / r.height - 0.5;
+    card.style.transform  = `rotateY(${mx * 6}deg) rotateX(${-my * 4}deg)`;
+    card.style.transition = 'transform 0.1s ease';
+  });
+  scene.addEventListener('mouseleave', () => {
+    card.style.transform  = 'rotateY(0) rotateX(0)';
+    card.style.transition = 'transform 0.6s ease';
+  });
+}
+
+/* ── COMPTE À REBOURS ── */
+// Date cible : Samedi 9 mai 2026 à 09:00
+const TARGET = new Date('2026-05-09T09:00:00');
+
+const elDays  = document.getElementById('cd-days');
+const elHours = document.getElementById('cd-hours');
+const elMins  = document.getElementById('cd-mins');
+const elSecs  = document.getElementById('cd-secs');
+
+let prev = { d:'', h:'', m:'', s:'' };
+
+function pad(n) { return String(Math.max(0, Math.floor(n))).padStart(2, '0'); }
+
+function flip(el, val, key) {
+  if (val !== prev[key]) {
+    el.classList.remove('flip');
+    void el.offsetWidth; // reflow pour relancer l'animation
+    el.classList.add('flip');
+    el.textContent = val;
+    prev[key] = val;
+  }
+}
+
+function tick() {
+  const diff = TARGET - Date.now();
+  if (diff <= 0) {
+    [elDays, elHours, elMins, elSecs].forEach(el => el.textContent = '00');
+    return;
+  }
+  flip(elDays,  pad(diff / 86400000),          'd');
+  flip(elHours, pad(diff % 86400000 / 3600000), 'h');
+  flip(elMins,  pad(diff % 3600000  / 60000),   'm');
+  flip(elSecs,  pad(diff % 60000    / 1000),    's');
+}
+
+tick();
+setInterval(tick, 1000);
+</script>
+</body>
+</html>
